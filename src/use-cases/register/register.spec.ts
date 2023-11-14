@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { RegisterUseCase } from "./register";
 import { InMemoryUserRepository } from "../../repositories/in-memory/in-memory-user-repository";
 import { compare } from "bcryptjs";
+import { EmailAlreadyRegisteredError } from "./errors/email-already-registered-error";
 
 let userRepository: InMemoryUserRepository;
 let sut: RegisterUseCase;
@@ -53,7 +54,7 @@ describe("Register Use Case", () => {
         neightborhood: "Vila Nova",
         cep: "89000-000",
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(EmailAlreadyRegisteredError);
   });
 
   it("should encrypt the user password on registration", async () => {
