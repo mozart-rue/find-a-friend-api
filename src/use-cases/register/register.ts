@@ -1,7 +1,7 @@
 import { hash } from "bcryptjs";
 import { UserModel } from "../../models/user-model";
 import { UserRepository } from "../../repositories/user-repository";
-import { EmailAlreadyRegisteredError } from "./errors/email-already-registered-error";
+import { EmailAlreadyRegisteredError } from "../errors/email-already-registered-error";
 
 interface RegisterUseCaseRequest {
   id?: string;
