@@ -26,4 +26,32 @@ describe("Register Use Case", () => {
 
     expect(user.id).toEqual("userID-01");
   });
+
+  it("should not be able to register same email twice", async () => {
+    await sut.exec({
+      id: "userID-01",
+      name: "John Doe",
+      email: "example@email.com",
+      password: "keyword123",
+      phoneNumber: "00 5555-5555",
+      estate: "Santa Catarina",
+      city: "Blumenau",
+      neightborhood: "Vila Nova",
+      cep: "89000-000",
+    });
+
+    await expect(() =>
+      sut.exec({
+        id: "userID-01",
+        name: "John Doe",
+        email: "example@email.com",
+        password: "keyword123",
+        phoneNumber: "00 5555-5555",
+        estate: "Santa Catarina",
+        city: "Blumenau",
+        neightborhood: "Vila Nova",
+        cep: "89000-000",
+      }),
+    ).rejects.toBeInstanceOf(Error);
+  });
 });
