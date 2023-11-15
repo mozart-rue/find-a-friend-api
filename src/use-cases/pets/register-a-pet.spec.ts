@@ -4,6 +4,7 @@ import { InMemoryPetRepository } from "../../repositories/in-memory/in-memory-pe
 import { InMemoryUserRepository } from "../../repositories/in-memory/in-memory-user-repository";
 import { hash } from "bcryptjs";
 import { UserModel } from "../../models/user-model";
+import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 
 let userRepository: InMemoryUserRepository;
 let petRepository: InMemoryPetRepository;
@@ -45,5 +46,21 @@ describe("Register a pet use case", () => {
     expect(pet.id).toEqual(expect.any(String));
     expect(pet.name).toEqual("rufus");
     expect(pet.orgId).toEqual(org.id);
+  });
+
+  it("should not be able to register a pet with inexistent user", async () => {
+    await expect(() =>
+      sut.exec({
+        orgId: "not-existent-id",
+        name: "rufus",
+        age: 2,
+        type: "cachorro",
+        size: "TALL",
+        energy: 5,
+        description: "é um cachorro muito legal e divertido para se ter ",
+        adoptionRequirements: [],
+        photos: [],
+      }),
+    ).rejects.toBeInstanceOf(ResourceNotFoundError);
   });
 });
