@@ -9,11 +9,22 @@ export class InMemoryPetRepository implements PetRepository {
     return pet;
   }
 
-  async fetchByCityAndEstate({ estate, city }: FetchRequest) {
+  async fetchByCityAndEstate({
+    estate,
+    city,
+    age,
+    type,
+    size,
+    energy,
+  }: FetchRequest) {
     const pets: PetModel[] = this.items.filter((item) => {
       return (
         city.toUpperCase() === item.org.city.toUpperCase() &&
-        estate.toUpperCase() === item.org.estate.toUpperCase()
+        estate.toUpperCase() === item.org.estate.toUpperCase() &&
+        (age ? age === item.age : true) &&
+        (type ? type.toUpperCase() === item.type.toUpperCase() : true) &&
+        (size ? size === item.size : true) &&
+        (energy ? energy === item.energy : true)
       );
     });
 
