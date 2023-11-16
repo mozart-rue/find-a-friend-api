@@ -1,5 +1,6 @@
 import { PetModel } from "../../models/pet-model";
 import { PetRepository } from "../../repositories/pet-repository";
+import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 
 interface GetPetUseCaseRequest {
   petId: string;
@@ -16,7 +17,7 @@ export class GetPetUseCase {
     const pet = await this.petRespository.getPetById(petId);
 
     if (!pet) {
-      throw new Error();
+      throw new ResourceNotFoundError();
     }
 
     return { pet };
