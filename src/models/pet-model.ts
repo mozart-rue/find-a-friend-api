@@ -1,8 +1,9 @@
 import { randomUUID } from "crypto";
+import { UserModel } from "./user-model";
 
 interface PetModelInterface {
   id?: string;
-  orgId: string;
+  org: UserModel;
   name: string;
   age: number;
   type: string;
@@ -15,7 +16,7 @@ interface PetModelInterface {
 
 export class PetModel {
   public id: string;
-  public orgId: string;
+  public org: UserModel;
   public name: string;
   public age: number;
   public type: string;
@@ -28,7 +29,7 @@ export class PetModel {
 
   constructor({
     id,
-    orgId,
+    org,
     name,
     age,
     type,
@@ -39,7 +40,7 @@ export class PetModel {
     photos,
   }: PetModelInterface) {
     this.id = id ?? randomUUID();
-    this.orgId = orgId;
+    this.org = org;
     this.name = name;
     this.age = age;
     this.type = type;
