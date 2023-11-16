@@ -5,6 +5,8 @@ import { PetModel } from "../../models/pet-model";
 import { UserModel } from "../../models/user-model";
 import { hash } from "bcryptjs";
 import { InMemoryUserRepository } from "../../repositories/in-memory/in-memory-user-repository";
+import { CityNotFilterError } from "../errors/city-not-filter-error";
+import { EstateNotFilterError } from "../errors/estate-not-filter-error";
 
 let userRepository: InMemoryUserRepository;
 let petRepository: InMemoryPetRepository;
@@ -99,7 +101,7 @@ describe("Fetch Pets Use Case", () => {
         estate: "Estado-1",
         city: "",
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(CityNotFilterError);
   });
 
   it("should not be able to fetch pets without estate filter", async () => {
@@ -139,6 +141,6 @@ describe("Fetch Pets Use Case", () => {
         estate: "",
         city: "Cidade-1",
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(EstateNotFilterError);
   });
 });
