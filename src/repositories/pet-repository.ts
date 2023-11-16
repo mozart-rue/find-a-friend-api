@@ -11,6 +11,7 @@ export interface FetchRequest {
 
 export interface PetRepository {
   create(pet: PetModel): Promise<PetModel>;
+  getPetById(id: string): Promise<PetModel | null>;
   fetchByCityAndEstate({
     estate,
     city,
