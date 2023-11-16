@@ -45,7 +45,7 @@ describe("Register a pet use case", () => {
 
     expect(pet.id).toEqual(expect.any(String));
     expect(pet.name).toEqual("rufus");
-    expect(pet.orgId).toEqual(org.id);
+    expect(pet.org.id).toEqual(org.id);
   });
 
   it("should not be able to register a pet with inexistent user", async () => {
