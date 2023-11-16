@@ -46,7 +46,7 @@ export class ResgisterAPetUseCase {
 
     const pet = new PetModel({
       id,
-      orgId,
+      org,
       name,
       age,
       type,
